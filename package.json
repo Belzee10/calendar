@@ -3,13 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "concurrently \"yarn dev\" \"yarn serve\"",
     "serve": "vue-cli-service serve",
+    "dev": "json-server --watch src/server/index.js --cors --port=3100",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "test:watch": "vue-cli-service test:unit --watch"
   },
   "dependencies": {
+    "axios": "^0.19.0",
+    "concurrently": "^5.0.0",
     "core-js": "^2.6.5",
+    "cuid": "^2.1.6",
+    "faker": "^4.1.0",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0"
   },
