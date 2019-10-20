@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import App from './App.vue';
 import Calendar from './components/Calendar/Calendar.vue';
@@ -26,7 +26,7 @@ describe('App.vue', () => {
     ];
 
     getEvents.mockResolvedValueOnce(items);
-    const wrapper = mount(App, {
+    const wrapper = shallowMount(App, {
       vuetify,
       localVue
     });

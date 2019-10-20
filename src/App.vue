@@ -1,7 +1,13 @@
 <template>
   <v-app>
     <v-content>
-      <calendar :events="events" />
+      <v-container fill-height>
+        <v-row>
+          <v-col>
+            <calendar :events="events" />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-content>
   </v-app>
 </template>
