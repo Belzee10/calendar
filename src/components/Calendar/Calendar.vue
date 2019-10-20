@@ -1,6 +1,9 @@
 <template>
   <v-sheet height="500" class="calendar-container">
     <v-calendar type="month" :events="events">
+      <template v-slot:day-label="{ day }">
+        <DayLabel :day="day" />
+      </template>
       <template v-slot:day="{ date }">
         <Day :events="getEventsByDay(date)" :day="date" />
       </template>
@@ -10,9 +13,11 @@
 
 <script>
 import Day from '@/components/Day/Day.vue';
+import DayLabel from '@/components/DayLabel/DayLabel.vue';
+
 export default {
   name: 'Calendar',
-  components: { Day },
+  components: { Day, DayLabel },
   props: {
     events: {
       type: Array,

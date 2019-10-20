@@ -13,7 +13,6 @@ module.exports = () => {
         .endOf('month')
         .format('YYYY-MM-DD')
     );
-    // const daysToAdd = i % 2 === 0 ? 1 : 2;
 
     data.events.push({
       id: cuid(),
@@ -21,9 +20,6 @@ module.exports = () => {
       start: dayjs(startDate).format('YYYY-MM-DD'),
       type: i % 2 === 0 ? 'work' : 'home',
       isPriority: faker.random.boolean()
-      // end: dayjs(startDate)
-      //   .add(daysToAdd, 'day')
-      //   .format('YYYY-MM-DD')
     });
   }
   return data;
