@@ -1,5 +1,11 @@
 <template>
-  <v-btn text small @mouseenter="handleHover" @mouseleave="handleHover">
+  <v-btn
+    class="add-event"
+    text
+    small
+    @mouseenter="handleHover"
+    @mouseleave="handleHover"
+  >
     {{ day }}
     <span v-if="showText" class="font-weight-light ml-1">Add event</span>
   </v-btn>
