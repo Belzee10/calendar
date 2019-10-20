@@ -14,6 +14,7 @@ export default {
       type: Array,
       default: () => []
     },
+    // TODO not sure
     day: {
       type: String,
       default: ''

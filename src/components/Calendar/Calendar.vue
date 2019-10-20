@@ -1,8 +1,8 @@
 <template>
-  <v-sheet height="500">
+  <v-sheet height="500" class="calendar-container">
     <v-calendar type="month" :events="events">
       <template v-slot:day="{ date }">
-        <Day />
+        <Day :events="getEventsByDay(date)" :day="date" />
       </template>
     </v-calendar>
   </v-sheet>
@@ -18,8 +18,18 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  methods: {
+    getEventsByDay(date) {
+      return this.events.filter(item => item.start === date);
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.calendar-container {
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+}
+</style>

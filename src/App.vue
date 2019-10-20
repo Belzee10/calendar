@@ -3,7 +3,10 @@
     <v-content>
       <v-container fill-height>
         <v-row>
-          <v-col>
+          <v-col cols="12">
+            <h2 class="display-1 text-center mb-5">Calendar</h2>
+          </v-col>
+          <v-col cols="12">
             <calendar :events="events" />
           </v-col>
         </v-row>
