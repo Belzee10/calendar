@@ -18,10 +18,10 @@ module.exports = () => {
     data.events.push({
       id: cuid(),
       name: faker.lorem.words(),
-      start: dayjs(startDate).format('YYYY-MM-DD'),
-      end: dayjs(startDate)
-        .add(daysToAdd, 'day')
-        .format('YYYY-MM-DD')
+      start: dayjs(startDate).format('YYYY-MM-DD')
+      // end: dayjs(startDate)
+      //   .add(daysToAdd, 'day')
+      //   .format('YYYY-MM-DD')
     });
   }
   return data;
