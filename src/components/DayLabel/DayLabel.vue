@@ -5,6 +5,7 @@
     small
     @mouseenter="handleHover"
     @mouseleave="handleHover"
+    @click="addEvent"
   >
     {{ day }}
     <span v-if="showText" class="font-weight-light ml-1">Add event</span>
@@ -18,6 +19,10 @@ export default {
     day: {
       type: Number,
       default: null
+    },
+    date: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -26,6 +31,11 @@ export default {
   methods: {
     handleHover() {
       this.showText = !this.showText;
+    },
+    addEvent() {
+      this.$emit('add-event', {
+        date: this.date
+      });
     }
   }
 };

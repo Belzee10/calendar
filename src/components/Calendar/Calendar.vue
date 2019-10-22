@@ -1,11 +1,11 @@
 <template>
   <v-sheet height="500" class="calendar-container">
     <v-calendar type="month" :events="events">
-      <template v-slot:day-label="{ day }">
-        <DayLabel :day="day" />
+      <template v-slot:day-label="{ day, date }">
+        <DayLabel :day="day" :date="date" @add-event="addEvent" />
       </template>
       <template v-slot:day="{ date }">
-        <Day :events="getEventsByDay(date)" :day="date" />
+        <Day :events="getEventsByDay(date)" />
       </template>
     </v-calendar>
   </v-sheet>
@@ -27,6 +27,9 @@ export default {
   methods: {
     getEventsByDay(date) {
       return this.events.filter(item => item.start === date);
+    },
+    addEvent(date) {
+      this.$emit('add-event', date);
     }
   }
 };

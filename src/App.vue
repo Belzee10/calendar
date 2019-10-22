@@ -2,12 +2,13 @@
   <v-app>
     <v-content>
       <v-container fill-height>
+        <Modal v-if="isModalOpen" attach :is-open="isModalOpen" />
         <v-row>
           <v-col cols="12">
             <h2 class="display-1 text-center mb-5">Calendar</h2>
           </v-col>
           <v-col cols="12">
-            <calendar :events="events" />
+            <Calendar :events="events" @add-event="handleAddEvent" />
           </v-col>
         </v-row>
       </v-container>
@@ -17,19 +18,29 @@
 
 <script>
 import Calendar from './components/Calendar/Calendar.vue';
+import Modal from './components/Modal/Modal.vue';
+
 import { getEvents } from './api/api.js';
 export default {
   name: 'App',
   components: {
-    Calendar
+    Calendar,
+    Modal
   },
   data: () => ({
-    events: []
+    events: [],
+    isModalOpen: false
   }),
   mounted() {
     getEvents().then(res => {
       this.events = res;
     });
+  },
+  methods: {
+    handleAddEvent(date) {
+      this.isModalOpen = true;
+      console.log(date);
+    }
   }
 };
 </script>

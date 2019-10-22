@@ -20,4 +20,17 @@ describe('DayLabel.vue', () => {
     wrapper.trigger('mouseleave');
     expect(wrapper.text()).not.toContain('Add event');
   });
+
+  test('should emit an event when click on the button', () => {
+    const props = {
+      date: '2019-10-20'
+    };
+    const wrapper = mount(DayLabel, {
+      vuetify,
+      localVue,
+      propsData: props
+    });
+    wrapper.find('.add-event').trigger('click');
+    expect(wrapper.emitted('add-event')[0]).toEqual([props]);
+  });
 });

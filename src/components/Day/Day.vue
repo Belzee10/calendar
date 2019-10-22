@@ -13,11 +13,6 @@ export default {
     events: {
       type: Array,
       default: () => []
-    },
-    // TODO not sure
-    day: {
-      type: String,
-      default: ''
     }
   }
 };

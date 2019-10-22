@@ -4,6 +4,7 @@ import App from './App.vue';
 import { getEvents } from './api/api.js';
 import flushPromises from 'flush-promises';
 import Calendar from './components/Calendar/Calendar.vue';
+import Modal from './components/Modal/Modal.vue';
 
 const localVue = createLocalVue();
 jest.mock('./api/api.js');
@@ -36,12 +37,13 @@ describe('App.vue', () => {
     expect(calendar.props().events).toEqual(items);
   });
 
-  // test('should send a post request with the correct payload', () => {
-  //   const wrapper = mount(App, {
-  //     vuetify,
-  //     localVue
-  //   });
-  //   wrapper.find('.add-event').trigger('click');
-  //   expect()
-  // });
+  test('should send a "createEvent" post request with the correct payload', () => {
+    const wrapper = mount(App, {
+      vuetify,
+      localVue
+    });
+    wrapper.find('.add-event').trigger('click');
+    const modal = wrapper.find(Modal);
+    expect(modal.exists()).toBeTruthy();
+  });
 });
