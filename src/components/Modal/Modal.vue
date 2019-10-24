@@ -1,14 +1,8 @@
 <template>
   <v-dialog v-model="isOpen" width="500">
-    <template v-slot:activator="{ on }">
-      <v-btn color="red lighten-2" dark v-on="on">
-        Click Me
-      </v-btn>
-    </template>
-
     <v-card>
       <v-card-title class="headline grey lighten-2" primary-title>
-        Privacy Policy
+        {{ modalTitle }}
       </v-card-title>
 
       <v-card-text>
@@ -40,6 +34,10 @@ export default {
     isOpen: {
       type: Boolean,
       default: false
+    },
+    modalTitle: {
+      type: String,
+      default: ''
     }
   }
 };

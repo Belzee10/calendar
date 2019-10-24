@@ -2,7 +2,12 @@
   <v-app>
     <v-content>
       <v-container fill-height>
-        <Modal v-if="isModalOpen" attach :is-open="isModalOpen" />
+        <Modal
+          v-if="isModalOpen"
+          attach
+          :is-open="isModalOpen"
+          modal-title="Modal Title"
+        />
         <v-row>
           <v-col cols="12">
             <h2 class="display-1 text-center mb-5">Calendar</h2>
