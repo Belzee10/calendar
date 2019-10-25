@@ -7,7 +7,6 @@
             v-model="name"
             class="event"
             label="Event"
-            :rules="[v => !!v || 'Invalid field']"
           ></v-text-field>
         </v-col>
         <v-col cols="12">

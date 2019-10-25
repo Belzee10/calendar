@@ -31,7 +31,7 @@ describe('DayLabel.vue', () => {
       propsData: props
     });
     wrapper.find('.add-event').trigger('click');
-    expect(wrapper.emitted('add-event')[0]).toEqual([props]);
+    expect(wrapper.emitted('add-event')[0]).toEqual([props.date]);
   });
 
   test('should render correclty', () => {

@@ -33,9 +33,7 @@ export default {
       this.showText = !this.showText;
     },
     addEvent() {
-      this.$emit('add-event', {
-        date: this.date
-      });
+      this.$emit('add-event', this.date);
     }
   }
 };

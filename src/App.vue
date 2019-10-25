@@ -40,7 +40,8 @@ export default {
   },
   data: () => ({
     events: [],
-    isModalOpen: false
+    isModalOpen: false,
+    eventDate: ''
   }),
   mounted() {
     getEvents().then(res => {
@@ -48,14 +49,23 @@ export default {
     });
   },
   methods: {
-    handleOpenModal() {
+    handleOpenModal(date) {
       this.isModalOpen = true;
+      this.eventDate = date;
     },
     handleCancel() {
       this.isModalOpen = false;
+      this.eventDate = '';
     },
     handleSubmit(data) {
-      addEvent(data).then(res => console.log(res));
+      const req = {
+        ...data,
+        start: this.eventDate
+      };
+      addEvent(req).then(res => {
+        this.events = [...this.events, res];
+        this.isModalOpen = false;
+      });
     }
   }
 };

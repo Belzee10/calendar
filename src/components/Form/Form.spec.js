@@ -22,8 +22,8 @@ describe('Form.vue', () => {
     };
     const button = wrapper.find('.v-btn.submit');
     wrapper.find('.event input').setValue(formValue.name);
-    wrapper.find('.type input').setValue('work');
-    wrapper.find('.isPriority input').setChecked(true);
+    wrapper.find('.type input').setValue(formValue.type);
+    wrapper.find('.isPriority input').setChecked(formValue.isPriority);
     button.trigger('click');
     expect(wrapper.emitted('submit')[0]).toEqual([formValue]);
   });
