@@ -2,15 +2,25 @@
 
 exports[`Event.vue should render correctly 1`] = `
 <div
-  class="event text-truncate text-capitalize ma-1 px-1 grey"
+  class="event-container mx-1"
 >
-  <i
-    aria-hidden="true"
-    class="v-icon notranslate mdi mdi mdi mdi-star theme--light"
-    style="font-size: 12px;"
-  />
+  <button
+    class="event text-truncate px-1 v-btn v-btn--depressed v-btn--tile theme--light v-size--default grey"
+    style="height: 15px;"
+    type="button"
+  >
+    <span
+      class="v-btn__content"
+    >
+      <i
+        aria-hidden="true"
+        class="v-icon notranslate mdi mdi mdi mdi-star theme--light"
+        style="font-size: 12px;"
+      />
+      
+    
   
-  
-
+    </span>
+  </button>
 </div>
 `;

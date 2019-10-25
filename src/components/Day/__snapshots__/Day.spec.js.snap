@@ -5,22 +5,42 @@ exports[`Day.vue should render correclty 1`] = `
   class="v-sheet theme--light"
 >
   <div
-    class="event text-truncate text-capitalize ma-1 px-1 blue"
+    class="event-container mx-1"
     start="2019-10-04"
   >
-    <!---->
-    
-  quod enim et
-
+    <button
+      class="event text-truncate px-1 v-btn v-btn--depressed v-btn--tile theme--light v-size--default blue"
+      style="height: 15px;"
+      type="button"
+    >
+      <span
+        class="v-btn__content"
+      >
+        <!---->
+        
+    quod enim et
+  
+      </span>
+    </button>
   </div>
   <div
-    class="event text-truncate text-capitalize ma-1 px-1 blue"
+    class="event-container mx-1"
     start="2019-10-04"
   >
-    <!---->
-    
-  voluptatem aperiam recusandae
-
+    <button
+      class="event text-truncate px-1 v-btn v-btn--depressed v-btn--tile theme--light v-size--default blue"
+      style="height: 15px;"
+      type="button"
+    >
+      <span
+        class="v-btn__content"
+      >
+        <!---->
+        
+    voluptatem aperiam recusandae
+  
+      </span>
+    </button>
   </div>
 </div>
 `;
