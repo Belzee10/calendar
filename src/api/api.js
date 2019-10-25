@@ -19,3 +19,12 @@ export const addEvent = async data => {
     return error;
   }
 };
+
+export const deleteEvent = async id => {
+  try {
+    const res = await axios.delete(`http://localhost:3100/events/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};

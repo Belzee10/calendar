@@ -19,7 +19,7 @@ describe('Event.vue', () => {
       propsData: props
     });
     wrapper.find('.event').trigger('click');
-    expect(wrapper.emitted('click-on-event')[0]).toEqual([props]);
+    expect(wrapper.emitted('click-on-event')[0]).toEqual([props.id]);
   });
 
   test('should set "blue" or "grey" colors depending of the type', () => {

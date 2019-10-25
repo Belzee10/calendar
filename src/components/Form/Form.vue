@@ -31,6 +31,9 @@
           <v-btn small class="cancel secondary ml-2" @click="cancel"
             >Cancel</v-btn
           >
+          <v-btn small class="delete error float-right" @click="$emit('delete')"
+            >Delete</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>

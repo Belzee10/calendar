@@ -9,7 +9,11 @@
           :modal-title="getModalTitle"
         >
           <template v-slot>
-            <Form @cancel="handleCancel" @submit="handleSubmit" />
+            <Form
+              @cancel="handleCancel"
+              @submit="handleSubmit"
+              @delete="handleDelete"
+            />
           </template>
         </Modal>
         <v-row>
@@ -17,7 +21,11 @@
             <h2 class="display-1 text-center mb-5">Calendar</h2>
           </v-col>
           <v-col cols="12">
-            <Calendar :events="events" @add-event="handleOpenModal" />
+            <Calendar
+              :events="events"
+              @add-event="handleOpenModal"
+              @click-on-event="editEvent"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -30,7 +38,7 @@ import Calendar from './components/Calendar/Calendar.vue';
 import Modal from './components/Modal/Modal.vue';
 import Form from './components/Form/Form.vue';
 
-import { getEvents, addEvent } from './api/api.js';
+import { getEvents, addEvent, deleteEvent } from './api/api.js';
 export default {
   name: 'App',
   components: {
@@ -41,11 +49,15 @@ export default {
   data: () => ({
     events: [],
     isModalOpen: false,
-    eventDate: ''
+    eventDate: '',
+    eventBeingEdited: null
   }),
   computed: {
     getModalTitle() {
-      return this.eventDate ? 'Create Event' : '';
+      let title = '';
+      if (this.eventDate) title = 'Create Event';
+      if (this.eventBeingEdited) title = 'Edit Event';
+      return title;
     }
   },
   mounted() {
@@ -54,6 +66,11 @@ export default {
     });
   },
   methods: {
+    editEvent(id) {
+      this.isModalOpen = true;
+      const event = this.events.find(item => item.id === id);
+      this.eventBeingEdited = event;
+    },
     handleOpenModal(date) {
       this.isModalOpen = true;
       this.eventDate = date;
@@ -69,6 +86,14 @@ export default {
       };
       addEvent(req).then(res => {
         this.events = [...this.events, res];
+        this.isModalOpen = false;
+      });
+    },
+    handleDelete() {
+      deleteEvent(this.eventBeingEdited.id).then(() => {
+        this.events = this.events.filter(
+          item => item.id !== this.eventBeingEdited.id
+        );
         this.isModalOpen = false;
       });
     }

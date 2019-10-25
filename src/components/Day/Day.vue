@@ -1,6 +1,11 @@
 <template>
   <v-sheet>
-    <Event v-for="event in events" :key="event.id" v-bind="event" />
+    <Event
+      v-for="event in events"
+      :key="event.id"
+      v-bind="event"
+      @click-on-event="id => $emit('click-on-event', id)"
+    />
   </v-sheet>
 </template>
 

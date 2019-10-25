@@ -44,9 +44,7 @@ export default {
   },
   methods: {
     emitClick() {
-      this.$emit('click-on-event', {
-        id: this.id
-      });
+      this.$emit('click-on-event', this.id);
     }
   }
 };

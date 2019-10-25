@@ -5,7 +5,10 @@
         <DayLabel :day="day" :date="date" @add-event="addEvent" />
       </template>
       <template v-slot:day="{ date }">
-        <Day :events="getEventsByDay(date)" />
+        <Day
+          :events="getEventsByDay(date)"
+          @click-on-event="id => $emit('click-on-event', id)"
+        />
       </template>
     </v-calendar>
   </v-sheet>
