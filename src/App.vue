@@ -10,6 +10,8 @@
         >
           <template v-slot>
             <Form
+              :is-editable="getIsEditable"
+              :populate-with="eventBeingEdited"
               @cancel="handleCancel"
               @submit="handleSubmit"
               @delete="handleDelete"
@@ -38,7 +40,7 @@ import Calendar from './components/Calendar/Calendar.vue';
 import Modal from './components/Modal/Modal.vue';
 import Form from './components/Form/Form.vue';
 
-import { getEvents, addEvent, deleteEvent } from './api/api.js';
+import { getEvents, addEvent, deleteEvent, editEvent } from './api/api.js';
 export default {
   name: 'App',
   components: {
@@ -58,6 +60,9 @@ export default {
       if (this.eventDate) title = 'Create Event';
       if (this.eventBeingEdited) title = 'Edit Event';
       return title;
+    },
+    getIsEditable() {
+      return this.eventBeingEdited && true;
     }
   },
   mounted() {
@@ -66,6 +71,11 @@ export default {
     });
   },
   methods: {
+    clearState() {
+      this.isModalOpen = false;
+      this.eventDate = '';
+      this.eventBeingEdited = null;
+    },
     editEvent(id) {
       this.isModalOpen = true;
       const event = this.events.find(item => item.id === id);
@@ -76,25 +86,38 @@ export default {
       this.eventDate = date;
     },
     handleCancel() {
-      this.isModalOpen = false;
-      this.eventDate = '';
+      this.clearState();
     },
     handleSubmit(data) {
-      const req = {
-        ...data,
-        start: this.eventDate
-      };
-      addEvent(req).then(res => {
-        this.events = [...this.events, res];
-        this.isModalOpen = false;
-      });
+      if (!this.eventBeingEdited) {
+        const req = {
+          ...data,
+          start: this.eventDate
+        };
+        addEvent(req).then(res => {
+          this.events = [...this.events, res];
+          this.clearState();
+        });
+      } else {
+        const req = {
+          ...data,
+          start: this.eventBeingEdited.start
+        };
+        editEvent(req, this.eventBeingEdited.id).then(res => {
+          const newEvents = [...this.events];
+          const index = newEvents.findIndex(item => item.id === res.id);
+          newEvents.splice(index, 1, res);
+          this.events = newEvents;
+          this.clearState();
+        });
+      }
     },
     handleDelete() {
       deleteEvent(this.eventBeingEdited.id).then(() => {
         this.events = this.events.filter(
           item => item.id !== this.eventBeingEdited.id
         );
-        this.isModalOpen = false;
+        this.clearState();
       });
     }
   }

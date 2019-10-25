@@ -4,14 +4,14 @@
       <v-row>
         <v-col cols="12">
           <v-text-field
-            v-model="name"
+            v-model="value.name"
             class="event"
             label="Event"
           ></v-text-field>
         </v-col>
         <v-col cols="12">
           <v-select
-            v-model="type"
+            v-model="value.type"
             class="type"
             :items="['work', 'home']"
             label="Type"
@@ -19,7 +19,7 @@
         </v-col>
         <v-col cols="12">
           <v-checkbox
-            v-model="isPriority"
+            v-model="value.isPriority"
             class="isPriority"
             label="Is Priority?"
           ></v-checkbox>
@@ -31,7 +31,11 @@
           <v-btn small class="cancel secondary ml-2" @click="cancel"
             >Cancel</v-btn
           >
-          <v-btn small class="delete error float-right" @click="$emit('delete')"
+          <v-btn
+            v-if="isEditable"
+            small
+            class="delete error float-right"
+            @click="$emit('delete')"
             >Delete</v-btn
           >
         </v-col>
@@ -43,20 +47,30 @@
 <script>
 export default {
   name: 'Form',
+  props: {
+    isEditable: {
+      type: Boolean,
+      default: false
+    },
+    populateWith: {
+      type: Object,
+      default: () => null
+    }
+  },
   data: () => ({
     valid: true,
-    name: '',
-    type: '',
-    isPriority: false
+    value: {
+      name: '',
+      type: '',
+      isPriority: false
+    }
   }),
+  created() {
+    if (this.populateWith) this.value = this.populateWith;
+  },
   methods: {
     submit() {
-      if (this.$refs.form.validate())
-        this.$emit('submit', {
-          name: this.name,
-          type: this.type,
-          isPriority: this.isPriority
-        });
+      if (this.$refs.form.validate()) this.$emit('submit', this.value);
     },
     cancel() {
       this.$emit('cancel');

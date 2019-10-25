@@ -54,8 +54,10 @@ describe('App.vue', () => {
     };
     wrapper.find('.add-event').trigger('click');
     const modal = wrapper.find(Modal);
+
     expect(modal.exists()).toBeTruthy();
     expect(modal.find('.title').text()).toContain('Create Event');
+    expect(wrapper.find('.delete').exists()).toBeFalsy();
 
     const button = wrapper.find('.v-btn.submit');
     wrapper.find('.event input').setValue(formValue.name);
@@ -80,6 +82,7 @@ describe('App.vue', () => {
 
     expect(modal.exists()).toBeTruthy();
     expect(modal.find('.title').text()).toContain('Edit Event');
+    expect(wrapper.find('.delete').exists()).toBeTruthy();
 
     wrapper.find('.delete').trigger('click');
     const url = `http://localhost:3100/events/${items[0].id}`;
