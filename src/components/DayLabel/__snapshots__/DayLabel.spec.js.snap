@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DayLabel.vue should render correclty 1`] = `
+<button
+  class="add-event v-btn v-btn--flat v-btn--text theme--light v-size--small"
+  type="button"
+>
+  <span
+    class="v-btn__content"
+  >
+    
+  1
+  
+    <!---->
+  </span>
+</button>
+`;

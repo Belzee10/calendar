@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Day.vue should render correclty 1`] = `
+<div
+  class="v-sheet theme--light"
+>
+  <div
+    class="event text-truncate text-capitalize ma-1 px-1 blue"
+    start="2019-10-04"
+  >
+    <!---->
+    
+  quod enim et
+
+  </div>
+  <div
+    class="event text-truncate text-capitalize ma-1 px-1 blue"
+    start="2019-10-04"
+  >
+    <!---->
+    
+  voluptatem aperiam recusandae
+
+  </div>
+</div>
+`;

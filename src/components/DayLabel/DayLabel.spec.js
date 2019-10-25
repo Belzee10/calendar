@@ -33,4 +33,16 @@ describe('DayLabel.vue', () => {
     wrapper.find('.add-event').trigger('click');
     expect(wrapper.emitted('add-event')[0]).toEqual([props]);
   });
+
+  test('should render correclty', () => {
+    const props = {
+      day: 1
+    };
+    const wrapper = mount(DayLabel, {
+      vuetify,
+      localVue,
+      propsData: props
+    });
+    expect(wrapper.element).toMatchSnapshot();
+  });
 });

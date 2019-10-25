@@ -1,13 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
-import App from './App.vue';
-import { getEvents } from './api/api.js';
 import flushPromises from 'flush-promises';
-import Calendar from './components/Calendar/Calendar.vue';
+import mockAxios from 'axios';
+import App from './App.vue';
+// import Calendar from './components/Calendar/Calendar.vue';
 // import Modal from './components/Modal/Modal.vue';
 
 const localVue = createLocalVue();
-jest.mock('./api/api.js');
 
 describe('App.vue', () => {
   let vuetify;
@@ -16,7 +15,7 @@ describe('App.vue', () => {
     vuetify = new Vuetify();
   });
 
-  test('should pass all events to the Calendar', async () => {
+  test('should pass all "events" to the Calendar', async () => {
     const items = [
       {
         id: 'ck1zbpm4r0000yc2p8l8m5p92',
@@ -27,30 +26,36 @@ describe('App.vue', () => {
       }
     ];
 
-    getEvents.mockResolvedValueOnce(items);
+    mockAxios.get.mockResolvedValueOnce({ data: items });
+
     const wrapper = mount(App, {
       vuetify,
       localVue
     });
+
     await flushPromises();
-    const calendar = wrapper.find(Calendar);
-    expect(calendar.props().events).toEqual(items);
+
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    expect(wrapper.findAll('.event')).toHaveLength(1);
   });
 
-  // test('should send a "createEvent" post request with the correct payload', async () => {
+  // test('should send a "createEvent" post request with the correct payload', () => {
   //   const wrapper = mount(App, {
   //     vuetify,
   //     localVue
+  //     // mocks: {
+  //     //   data: {
+  //     //     events: []
+  //     //   }
+  //     // }
   //   });
-  //   addEvent.mockResolvedValueOnce({});
-
-  //   const formValue = 'Value';
-  //   wrapper.find('.add-event').trigger('click');
-  //   const modal = wrapper.find(Modal);
-  //   expect(modal.exists()).toBeTruthy();
-  //   wrapper.find('input').setValue(formValue);
-  //   wrapper.find('.v-btn.submit').trigger('click');
-  //   flushPromises();
-  //   expect(addEvent).toHaveBeenCalled();
+  //   const calendar = wrapper.find(Calendar);
+  //   console.log(typeof calendar.vm.$props.events);
+  //   // const formValue = 'Value';
+  //   // wrapper.find('.add-event').trigger('click');
+  //   // const modal = wrapper.find(Modal);
+  //   // expect(modal.exists()).toBeTruthy();
+  //   // wrapper.find('input').setValue(formValue);
+  //   // wrapper.find('.v-btn.submit').trigger('click');
   // });
 });

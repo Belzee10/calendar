@@ -51,4 +51,17 @@ describe('Event.vue', () => {
     });
     expect(wrapper.find('.event').html()).toContain('mdi mdi-star');
   });
+
+  test('should render correctly', () => {
+    const props = {
+      isPriority: true,
+      type: 'work'
+    };
+    const wrapper = mount(Event, {
+      vuetify,
+      localVue,
+      propsData: props
+    });
+    expect(wrapper.element).toMatchSnapshot();
+  });
 });
