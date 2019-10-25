@@ -53,6 +53,7 @@ describe('App.vue', () => {
     wrapper.find('.add-event').trigger('click');
     const modal = wrapper.find(Modal);
     expect(modal.exists()).toBeTruthy();
+    expect(modal.find('.title').text()).toContain('Create Event');
 
     const button = wrapper.find('.v-btn.submit');
     wrapper.find('.event input').setValue(formValue.name);

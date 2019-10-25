@@ -6,7 +6,7 @@
           v-if="isModalOpen"
           attach
           :is-open="isModalOpen"
-          modal-title="Modal Title"
+          :modal-title="getModalTitle"
         >
           <template v-slot>
             <Form @cancel="handleCancel" @submit="handleSubmit" />
@@ -43,6 +43,11 @@ export default {
     isModalOpen: false,
     eventDate: ''
   }),
+  computed: {
+    getModalTitle() {
+      return this.eventDate ? 'Create Event' : '';
+    }
+  },
   mounted() {
     getEvents().then(res => {
       this.events = res;

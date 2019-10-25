@@ -1,6 +1,7 @@
 <template>
   <v-btn
     class="add-event"
+    :outlined="isCurrentDay"
     text
     small
     @mouseenter="handleHover"
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 export default {
   name: 'DayLabel',
   props: {
@@ -28,6 +30,13 @@ export default {
   data: () => ({
     showText: false
   }),
+  computed: {
+    isCurrentDay() {
+      return (
+        dayjs(this.date).format('MM-DD-YYYY') === dayjs().format('MM-DD-YYYY')
+      );
+    }
+  },
   methods: {
     handleHover() {
       this.showText = !this.showText;
